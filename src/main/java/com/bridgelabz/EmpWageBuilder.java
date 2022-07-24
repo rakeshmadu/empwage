@@ -1,3 +1,5 @@
+
+
 package com.bridgelabz;
 
 public class EmpWageBuilder {
@@ -5,12 +7,15 @@ public class EmpWageBuilder {
         System.out.println("Welcome to employee wage computation ");
 
         int IS_FULL_TIME = 1;
+        int IS_PART_TIME = 2;
         int WAGE_PER_HR = 20;
         int FULL_TIME = 8;
-        int NO_TIME = 0;
+        int PART_TIME = 4;
 
-        int attendance = (int)Math.floor(Math.random() * 10) % 2;
+        double attendance = Math.floor(Math.random() * 10) % 3;
         if(attendance == IS_FULL_TIME) System.out.println("Employee wage = " + WAGE_PER_HR*FULL_TIME);
-        else System.out.println("Employee wage = " + WAGE_PER_HR*NO_TIME);
+        else if (attendance == IS_PART_TIME) {
+            System.out.println("Employee wage = " + WAGE_PER_HR*PART_TIME);
+        } else System.out.println("Employee wage = " + 0);
     }
 }
