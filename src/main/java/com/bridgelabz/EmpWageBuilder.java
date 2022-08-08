@@ -1,5 +1,12 @@
 package com.bridgelabz;
 
+interface IEmployeeWageComputation
+{
+    public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs);
+
+    public void calculateTotalWage();
+}
+
 class CompanyEmpWage
 {
     // instance constants
@@ -24,6 +31,7 @@ class CompanyEmpWage
         this.totalEmpWage = totalEmpWage;
     }
 
+    @Override
     public String toString()
     {
         System.out.println("Details of " + COMPANY_NAME + " employee");
@@ -35,7 +43,7 @@ class CompanyEmpWage
     }
 }
 
-public class EmpWageBuilder
+class EmployeeWageComputation implements IEmployeeWageComputation
 {
     // class constants
     public static final int PART_TIME = 1;
@@ -44,14 +52,14 @@ public class EmpWageBuilder
     int noOfCompanies, index;
     CompanyEmpWage[] companies;
 
-    public EmpWageBuilder(int noOfCompanies)
+    public EmployeeWageComputation(int noOfCompanies)
     {
         this.noOfCompanies = noOfCompanies;
         companies = new CompanyEmpWage[noOfCompanies];
         index = 0;
     }
 
-    void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs)
+    public void addCompany(String companyName, int wagePerHr, int maxWorkingDays, int maxWorkingHrs)
     {
         companies[index++] = new CompanyEmpWage(companyName, wagePerHr, maxWorkingDays, maxWorkingHrs);
     }
@@ -65,16 +73,16 @@ public class EmpWageBuilder
     {
         switch (empType)
         {
-        case FULL_TIME:
-            return 8;
-        case PART_TIME:
-            return 4;
-        default:
-            return 0;
+            case FULL_TIME:
+                return 8;
+            case PART_TIME:
+                return 4;
+            default:
+                return 0;
         }
     }
 
-    void calculateTotalWage()
+    public void calculateTotalWage()
     {
         for (CompanyEmpWage company : companies)
         {
@@ -105,7 +113,7 @@ public class EmpWageBuilder
 
     public static void main(String args[])
     {
-        EmpWageBuilder employeeWageComputation = new EmpWageBuilder(3);
+        EmployeeWageComputation employeeWageComputation = new EmployeeWageComputation(3);
         employeeWageComputation.addCompany("Microsoft", 4, 30, 100);
         employeeWageComputation.addCompany("Google", 5, 40, 170);
         employeeWageComputation.addCompany("Apple", 9, 10, 70);
